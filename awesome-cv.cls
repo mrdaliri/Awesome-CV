@@ -90,6 +90,7 @@
 }
 
 \RequirePackage{multicol}
+\RequirePackage{lastpage}
 
 %-------------------------------------------------------------------------------
 %                Configuration for directory locations
@@ -677,7 +678,7 @@
     \setlength{\extrarowheight}{0pt}
 %        {\tabularx{\textwidth}{|l|X|X} \hline}
 %          {\endtabularx}
-            \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{3.5cm} L{\textwidth - 7.5cm} R{4cm}}
+            \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{4.5cm} L{\textwidth - 8.5cm} R{4cm}}
             }{%
                 \end{tabular*}
     \end{center}
@@ -721,7 +722,7 @@
 }
 
 % Define an entry of cv teaching assistant
-% Usage: \cvshortentry{<position>}{<title>}{<teacher>}{<date>}
+% Usage: \cvta{<position>}{<title>}{<teacher>}{<date>}
 \newcommand*{\cvta}[4]{%
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
