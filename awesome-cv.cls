@@ -237,6 +237,12 @@
 % For elements of interests
 \newcommand*{\intereststyle}[1]{{\fontsize{10pt}{1em}\bodyfont\color{text} #1}}
 
+% For elements of references
+\newcommand*{\refnamestyle}[1]{{\fontsize{11pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\refpositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\reflocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
+\newcommand*{\refcontactstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{text} #1}}
+
 %-------------------------------------------------------------------------------
 %                Commands for personal information
 %-------------------------------------------------------------------------------
@@ -667,17 +673,20 @@
     \vspace{\acvSectionContentTopSkip}
     \vspace{-2.0mm}
     \begin{center}
-        \setlength\tabcolsep{1ex}
-        \setlength{\extrarowheight}{0pt}
-        \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth * \real{0.4}} L{\textwidth * \real{0.9}}}
-        }{
-        \end{tabular*}
+    \setlength\tabcolsep{0pt}
+    \setlength{\extrarowheight}{0pt}
+%        {\tabularx{\textwidth}{|l|X|X} \hline}
+%          {\endtabularx}
+            \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{3.5cm} L{\textwidth - 7.5cm} R{4cm}}
+            }{%
+                \end{tabular*}
     \end{center}
 }
 % Define a line of cv information(reference)
 % Usage: \cvreference{<name>}{<phone number / email>}
-\newcommand*{\cvreference}[2]{
-    \skilltypestyle{#1} & \skillsetstyle{#2} \\
+\newcommand*{\cvreference}[6]{
+    \refnamestyle{#1} & \reflocationstyle{#3} & \refcontactstyle{#5} \\
+    \refpositionstyle{#2} & \reflocationstyle{#4} &  \refcontactstyle{#6} \\
 }
 
 % Define an environment for cvitems(for cventry)
