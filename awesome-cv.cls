@@ -670,24 +670,25 @@
 }
 
 % Define an environment for cvreferences
-\newenvironment{cvreferences}{
+\newenvironment{cvreferences}{%
+  \begin{center}
+}{%
+  \end{center}
+}
+
+% Define a line of cv information(reference)
+% Usage: \cvreference{<name>}{<phone number / email>}
+\newcommand*{\cvreference}[6]{
     \vspace{\acvSectionContentTopSkip}
     \vspace{-2.0mm}
     \begin{center}
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}
-%        {\tabularx{\textwidth}{|l|X|X} \hline}
-%          {\endtabularx}
-            \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{4.5cm} L{\textwidth - 8.5cm} R{4cm}}
-            }{%
-                \end{tabular*}
+      \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{4.5cm} L{\textwidth - 8.5cm} R{4cm}}
+        \refnamestyle{#1} & \reflocationstyle{#3} & \refcontactstyle{#5} \\
+        \refpositionstyle{#2} & \reflocationstyle{#4} &  \refcontactstyle{#6} \\
+      \end{tabular*}
     \end{center}
-}
-% Define a line of cv information(reference)
-% Usage: \cvreference{<name>}{<phone number / email>}
-\newcommand*{\cvreference}[6]{
-    \refnamestyle{#1} & \reflocationstyle{#3} & \refcontactstyle{#5} \\
-    \refpositionstyle{#2} & \reflocationstyle{#4} &  \refcontactstyle{#6} \\
 }
 
 % Define an environment for cvitems(for cventry)
