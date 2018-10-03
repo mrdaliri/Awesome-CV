@@ -91,6 +91,7 @@
 
 \RequirePackage{multicol}
 \RequirePackage{lastpage}
+\RequirePackage{makecell}
 
 %-------------------------------------------------------------------------------
 %                Configuration for directory locations
@@ -181,9 +182,13 @@
   BoldItalicFont=*-MediumItalic,
 ]{Roboto}
 
-\newcommand*{\footerfont}{\sourcesanspro}
-\newcommand*{\bodyfont}{\sourcesanspro}
-\newcommand*{\bodyfontlight}{\sourcesansprolight}
+\newfontfamily\bodyfont{Avenir}
+\newfontfamily\bodyfontlight{Avenir}
+\newfontfamily\footerfont{Avenir}
+
+%\newcommand*{\footerfont}{\sourcesanspro}
+%\newcommand*{\bodyfont}{\sourcesanspro}
+%\newcommand*{\bodyfontlight}{\sourcesansprolight}
 
 %-------------------------------------------------------------------------------
 %                Configuration for styles
@@ -197,13 +202,13 @@
 \newcommand*{\headersocialstyle}[1]{{\fontsize{7.5pt}{1em}\headerfont\color{text} #1}}
 \newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
 \newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape\color{lighttext} #1}}
-\newcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
+\newcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\headerfont\bfseries\color{text}\@sectioncolor #1}}
 \newcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\textcolor{text}{#1}}}
 \newcommand*{\paragraphstyle}{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text}}
 
 % For elements of entry
-\newcommand*{\entrytitlestyle}[1]{{\fontsize{12pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\entrypositionstyle}[1]{{\fontsize{11pt}{1em}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\entrytitlestyle}[1]{{\fontsize{12pt}{1em}\headerfont\bfseries\color{darktext} #1}}
+\newcommand*{\entrypositionstyle}[1]{{\fontsize{11pt}{1em}\headerfont\scshape\color{graytext} #1}}
 \newcommand*{\entrydatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\slshape\color{graytext} #1}}
 \newcommand*{\entrylocationstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\slshape\color{awesome} #1}}
 \newcommand*{\descriptionstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\upshape\color{text} #1}}
@@ -236,13 +241,13 @@
 \newcommand*{\letterenclosurestyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\slshape\color{lighttext} #1}}
 
 % For elements of interests
-\newcommand*{\intereststyle}[1]{{\fontsize{10pt}{1em}\bodyfont\color{text} #1}}
+\newcommand*{\intereststyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{text} #1}}
 
 % For elements of references
 \newcommand*{\refnamestyle}[1]{{\fontsize{11pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\refpositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\scshape\color{graytext} #1}}
-\newcommand*{\reflocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
-\newcommand*{\refcontactstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{text} #1}}
+\newcommand*{\refpositionstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\reflocationstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\color{text} #1}}
+\newcommand*{\refcontactstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\color{text} #1}}
 
 %-------------------------------------------------------------------------------
 %                Commands for personal information
@@ -578,7 +583,7 @@
 \newcommand*{\cventry}[5]{%
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 5cm} R{5cm}}
     \ifempty{#2#3}
         {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
         {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\ \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
@@ -591,7 +596,7 @@
 \newcommand*{\cvshortentry}[4]{%
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 5cm} R{5cm}}
     \ifempty{#2#3}
         {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
         {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\ \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
@@ -658,7 +663,7 @@
   \begin{center}
     \setlength\tabcolsep{1ex}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.9}}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth - 4cm} }
 }{%
     \end{tabular*}
   \end{center}
@@ -666,7 +671,7 @@
 % Define a line of cv information(skill)
 % Usage: \cvskill{<type>}{<skillset>}
 \newcommand*{\cvskill}[2]{%
-	\skilltypestyle{#1} & \skillsetstyle{#2} \\
+	\skilltypestyle{#1} & \skillsetstyle{\makecell[l]{#2}} \\
 }
 
 % Define an environment for cvreferences
@@ -684,7 +689,7 @@
     \begin{center}
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}
-      \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{4.5cm} L{\textwidth - 8.5cm} R{4cm}}
+      \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{5cm} L{\textwidth - 9cm} R{4cm}}
         \refnamestyle{#1} & \reflocationstyle{#3} & \refcontactstyle{#5} \\
         \refpositionstyle{#2} & \reflocationstyle{#4} &  \refcontactstyle{#6} \\
       \end{tabular*}
@@ -693,10 +698,10 @@
 
 % Define an environment for cvitems(for cventry)
 \newenvironment{cvitems}{%
-  \vspace{-4.0mm}
+  \vspace{-3.0mm}
   \begin{justify}
   \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
-    \setlength{\parskip}{2pt}
+    \setlength{\parskip}{3pt}
     \renewcommand{\labelitemi}{\bullet}
 }{%
   \end{itemize}
