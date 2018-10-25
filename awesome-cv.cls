@@ -90,6 +90,8 @@
 }
 
 \RequirePackage{multicol}
+\RequirePackage{lastpage}
+\RequirePackage{makecell}
 
 %-------------------------------------------------------------------------------
 %                Configuration for directory locations
@@ -180,9 +182,13 @@
   BoldItalicFont=*-MediumItalic,
 ]{Roboto}
 
-\newcommand*{\footerfont}{\sourcesanspro}
-\newcommand*{\bodyfont}{\sourcesanspro}
-\newcommand*{\bodyfontlight}{\sourcesansprolight}
+\newfontfamily\bodyfont{Avenir}
+\newfontfamily\bodyfontlight{Avenir}
+\newfontfamily\footerfont{Avenir}
+
+%\newcommand*{\footerfont}{\sourcesanspro}
+%\newcommand*{\bodyfont}{\sourcesanspro}
+%\newcommand*{\bodyfontlight}{\sourcesansprolight}
 
 %-------------------------------------------------------------------------------
 %                Configuration for styles
@@ -196,16 +202,16 @@
 \newcommand*{\headersocialstyle}[1]{{\fontsize{7.5pt}{1em}\headerfont\color{text} #1}}
 \newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
 \newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape\color{lighttext} #1}}
-\newcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
+\newcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\headerfont\bfseries\color{text}\@sectioncolor #1}}
 \newcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\textcolor{text}{#1}}}
-\newcommand*{\paragraphstyle}{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text}}
+\newcommand*{\paragraphstyle}{\fontsize{11pt}{1em}\bodyfontlight\upshape\color{text}}
 
 % For elements of entry
-\newcommand*{\entrytitlestyle}[1]{{\fontsize{12pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\entrypositionstyle}[1]{{\fontsize{11pt}{1em}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\entrytitlestyle}[1]{{\fontsize{12pt}{1em}\headerfont\bfseries\color{darktext} #1}}
+\newcommand*{\entrypositionstyle}[1]{{\fontsize{11pt}{1em}\headerfont\scshape\color{graytext} #1}}
 \newcommand*{\entrydatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\slshape\color{graytext} #1}}
 \newcommand*{\entrylocationstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\slshape\color{awesome} #1}}
-\newcommand*{\descriptionstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\upshape\color{text} #1}}
+\newcommand*{\descriptionstyle}[1]{{\fontsize{11pt}{1.2em}\bodyfontlight\upshape\color{text} #1}}
 
 % For elements of subentry
 \newcommand*{\subentrytitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\mdseries\color{graytext} #1}}
@@ -215,14 +221,14 @@
 \newcommand*{\subdescriptionstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\upshape\color{text} #1}}
 
 % For elements of honor
-\newcommand*{\honortitlestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
-\newcommand*{\honorpositionstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\honortitlestyle}[1]{{\fontsize{9.5pt}{1em}\bodyfont\color{graytext} #1}}
+\newcommand*{\honorpositionstyle}[1]{{\fontsize{9.5pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\honordatestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\color{graytext} #1}}
 \newcommand*{\honorlocationstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\slshape\color{awesome} #1}}
 
 % For elements of skill
 \newcommand*{\skilltypestyle}[1]{{\fontsize{10pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
-\newcommand*{\skillsetstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
+\newcommand*{\skillsetstyle}[1]{{\fontsize{10pt}{1.4em}\bodyfontlight\color{text} #1}}
 
 % For elements of the cover letter
 \newcommand*{\lettersectionstyle}[1]{{\fontsize{14pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
@@ -236,6 +242,12 @@
 
 % For elements of interests
 \newcommand*{\intereststyle}[1]{{\fontsize{10pt}{1em}\bodyfont\color{text} #1}}
+
+% For elements of references
+\newcommand*{\refnamestyle}[1]{{\fontsize{11pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
+\newcommand*{\refpositionstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\scshape\color{graytext} #1}}
+\newcommand*{\reflocationstyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\color{text} #1}}
+\newcommand*{\refcontactstyle}[1]{{\fontsize{10pt}{1em}\bodyfont\color{text} #1}}
 
 %-------------------------------------------------------------------------------
 %                Commands for personal information
@@ -570,8 +582,8 @@
 % Usage: \cventry{<position>}{<title>}{<location>}{<date>}{<description>}
 \newcommand*{\cventry}[5]{%
     \setlength\tabcolsep{0pt}
-    \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+    \setlength{\extrarowheight}{2pt}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 5cm} R{5cm}}
     \ifempty{#2#3}
         {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
         {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\ \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
@@ -583,8 +595,8 @@
 % Usage: \cvshortentry{<position>}{<title>}{<location>}{<date>}
 \newcommand*{\cvshortentry}[4]{%
     \setlength\tabcolsep{0pt}
-    \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+    \setlength{\extrarowheight}{2pt}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 5cm} R{5cm}}
     \ifempty{#2#3}
         {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
         {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\ \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
@@ -622,7 +634,7 @@
   \begin{center}
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{2.5cm} L{\textwidth - 4.5cm} R{2cm}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{2.2cm} L{\textwidth - 4.2cm} R{2cm}}
 }{%
     \end{tabular*}
   \end{center}
@@ -651,23 +663,47 @@
   \begin{center}
     \setlength\tabcolsep{1ex}
     \setlength{\extrarowheight}{0pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.9}}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth - 4cm} }
 }{%
     \end{tabular*}
+    
+    \vspace{-7mm}
   \end{center}
 }
 % Define a line of cv information(skill)
 % Usage: \cvskill{<type>}{<skillset>}
 \newcommand*{\cvskill}[2]{%
-	\skilltypestyle{#1} & \skillsetstyle{#2} \\
+	\skilltypestyle{#1} & \skillsetstyle{\makecell[l]{#2}} \\ \vspace{0.5mm}
+}
+
+% Define an environment for cvreferences
+\newenvironment{cvreferences}{%
+  \begin{center}
+}{%
+  \end{center}
+}
+
+% Define a line of cv information(reference)
+% Usage: \cvreference{<name>}{<phone number / email>}
+\newcommand*{\cvreference}[6]{
+    \vspace{\acvSectionContentTopSkip}
+    \vspace{-2.0mm}
+    \begin{center}
+    \setlength\tabcolsep{0pt}
+    \setlength{\extrarowheight}{0pt}
+      \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{5cm} L{\textwidth - 9cm} R{4cm}}
+        \refnamestyle{#1} & \reflocationstyle{#3} & \refcontactstyle{#5} \\
+        \refpositionstyle{#2} & \reflocationstyle{#4} &  \refcontactstyle{#6} \\
+      \end{tabular*}
+    \end{center}
 }
 
 % Define an environment for cvitems(for cventry)
 \newenvironment{cvitems}{%
-  \vspace{-4.0mm}
+  \vspace{-3.0mm}
   \begin{justify}
   \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
-    \setlength{\parskip}{2pt}
+    \setlength{\parskip}{3pt}
     \renewcommand{\labelitemi}{\bullet}
 }{%
   \end{itemize}
@@ -694,7 +730,7 @@
 }
 
 % Define an entry of cv teaching assistant
-% Usage: \cvshortentry{<position>}{<title>}{<teacher>}{<date>}
+% Usage: \cvta{<position>}{<title>}{<teacher>}{<date>}
 \newcommand*{\cvta}[4]{%
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
@@ -755,150 +791,6 @@
     }
 }
 
-%-------------------------------------------------------------------------------
-%                Bibliography
-%-------------------------------------------------------------------------------
-%\RequirePackage[style=verbose, maxnames=99, sorting=ydnt]{biblatex}
-\RequirePackage[ % BibLaTeX
-	sorting=ydnt, % Sorts entries by year (descending order), name, title
-	style=verbose,
-	doi=false,
-	isbn=true,
-	url=false,
-	eprint=false,
-	backref = false, % include back references in bibliography
-	maxcitenames=3, % affects only the citations in the document body
-	maxbibnames=99, % affects only the bibliography, pass 99 to print all
-	hyperref=true,
-	block=none,
-	backend=biber % {Options: bibtex, biber}
-	]{biblatex}
 
-% Avoid splitting entries across page break (only for 3 or fewer lines)
-% Tip: http://tex.stackexchange.com/a/51261
-\AtBeginEnvironment{thebibliography}{%
-   \clubpenalty10000
-   \@clubpenalty \clubpenalty
-   \widowpenalty10000
-   \interlinepenalty5000}
 
-% Customized format, based on Fancy CV template created by Adrien Friggeri
-\DeclareFieldFormat[article]{title}{#1\par}
-\DeclareFieldFormat[inproceedings]{title}{#1\par}
-\DeclareFieldFormat[misc]{title}{#1\par}
-\DeclareFieldFormat[report]{title}{#1\par}
-\DeclareFieldFormat[incollection]{title}{#1\par}
 
-\DeclareBibliographyDriver{article}{%
-  \fontsize{9pt}{1em}\bodyfont%
-  \printfield{title}%
-  \newblock%
-  \printnames{author}%
-  \par%
-  \newblock%
-  {%
-    \fontsize{8pt}{1em}\bodyfont\scshape\color{awesome}%
-    \usebibmacro{journal+issuetitle}%
-    \setunit{\space}%
-    \printfield{pages}%
-    \newunit%
-    \printlist{publisher}%
-    \setunit*{\addcomma\space}%
-    \printfield{year}%
-    \newunit%
-  }
-  \par\vspace{0.8\baselineskip}
-}
-
-\DeclareBibliographyDriver{inproceedings}{%
-  \fontsize{9pt}{1em}\bodyfont%
-  \printfield{title}%
-  \newblock%
-  \printnames{author}%
-  \par%
-  \newblock%
-  {%
-    \fontsize{8pt}{1em}\bodyfontlight\color{graytext}%
-    \printfield{booktitle}%
-    \setunit{\addcomma\space}%
-    \printfield{year}%
-    \setunit{\addcomma\space}%
-    \printlist{location}%
-    \newunit%
-  }
-  \par\vspace{0.3\baselineskip}
-}
-
-\DeclareBibliographyDriver{incollection}{%
-  \fontsize{9pt}{1em}\bodyfont%
-  \printfield{title}%
-  \newblock%
-  \printnames{author}%
-  \par%
-  \newblock%
-  {%
-    \fontsize{8pt}{1em}\bodyfontlight\color{graytext}%
-    \printfield{booktitle}%
-    \setunit{\addcomma\space}%
-    \printfield{year}%
-    \setunit{\addcomma\space}%
-    \printlist{location}%
-    \newunit%
-  }
-  \par\vspace{0.3\baselineskip}
-}
-
-\DeclareBibliographyDriver{misc}{%
-  \fontsize{9pt}{1em}\bodyfont%
-  \printfield{title}%
-  \newblock%
-  \printnames{author}%
-  \par%
-  \newblock%
-  {%
-    \fontsize{8pt}{1em}\bodyfontlight\color{graytext}%
-    \printfield{booktitle}%
-    \setunit*{\addcomma\space}%
-    \printfield{note}%
-    \setunit*{\addcomma\space}%
-    \printfield{year}%
-    \setunit{\addcomma\space}%
-    \printlist{location}%
-    \newunit%
-  }
-  \par\vspace{0.3\baselineskip}
-}
-
-\DeclareBibliographyDriver{report}{%
-  \fontsize{9pt}{1em}\bodyfont%
-  \printfield{title}%
-  \newblock%
-  \printnames{author}%
-  \par%
-  \newblock%
-  {%
-    \fontsize{8pt}{1em}\bodyfontlight\color{graytext}%
-    \printfield{type}%
-    \setunit{\space}%
-    \printfield{number}%
-    \setunit{\addcomma\space}%
-    \printfield{year}%
-    \newunit%
-  }
-  \par\vspace{0.3\baselineskip}
-}
-
-% New syntax for flexible backend (BibLaTeX > v3.3)
-\DeclareNameFormat{author}{%
-  \fontsize{9pt}{1em}\bodyfontlight%
-  \renewcommand*{\multinamedelim}{\addcomma\addspace}%
-  \nameparts{#1}%
-  \ifthenelse{\value{listcount}=1}
-    {\ifblank{\namepartgiven}{}{\namepartgiven\space}%
-    \namepartfamily}%
-    {\ifblank{\namepartgiven}{}{\namepartgiven\space}%
-    \namepartfamily}%
-  \ifthenelse{\value{listcount}<\value{liststop}}
-  {\addcomma\space}
-  {}
-}
