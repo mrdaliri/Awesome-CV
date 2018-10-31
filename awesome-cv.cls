@@ -203,7 +203,7 @@
 \newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
 \newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape\color{lighttext} #1}}
 \newcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\headerfont\bfseries\color{text}\@sectioncolor #1}}
-\newcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\textcolor{text}{#1}}}
+\newcommand*{\subsectionstyle}[1]{{\fontsize{13pt}{1em}\bodyfont\scshape\textcolor{text}{#1}}}
 \newcommand*{\paragraphstyle}{\fontsize{11pt}{1em}\bodyfontlight\upshape\color{text}}
 
 % For elements of entry
@@ -391,7 +391,7 @@
 \newcommand{\acvHeaderAfterQuoteSkip}{5mm}
 
 % Others
-\newcommand{\acvSectionTopSkip}{3mm}
+\newcommand{\acvSectionTopSkip}{1.5mm}
 \newcommand{\acvSectionContentTopSkip}{2.5mm}
 
 
@@ -558,6 +558,7 @@
   \vspace{-3mm}
   \subsectionstyle{#1}
   \phantomsection
+  \color{darkgray}\vhrulefill{0.9pt}
 }
 
 % Define a paragraph for CV
@@ -573,7 +574,7 @@
 % Define an environment for cventry
 \newenvironment{cventries}{%
   \vspace{\acvSectionContentTopSkip}
-  \vspace{-2.0mm}
+  \vspace{-1.5mm}
   \begin{center}
 }{%
   \end{center}
@@ -582,6 +583,7 @@
 % Usage: \cventry{<position>}{<title>}{<location>}{<date>}{<description>}
 \newcommand*{\cventry}[5]{%
     \setlength\tabcolsep{0pt}
+    \vspace{-1mm}
     \setlength{\extrarowheight}{2pt}
     \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 5cm} R{5cm}}
     \ifempty{#2#3}
@@ -595,8 +597,9 @@
 % Usage: \cvshortentry{<position>}{<title>}{<location>}{<date>}
 \newcommand*{\cvshortentry}[4]{%
     \setlength\tabcolsep{0pt}
+    \vspace{-1mm}
     \setlength{\extrarowheight}{2pt}
-    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 5cm} R{5cm}}
+    \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 5.5cm} R{5.5cm}}
     \ifempty{#2#3}
         {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
         {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\ \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
@@ -630,7 +633,7 @@
 % Define an environment for cvhonor
 \newenvironment{cvhonors}{%
   \vspace{\acvSectionContentTopSkip}
-  \vspace{-2mm}
+  \vspace{-3mm}
   \begin{center}
     \setlength\tabcolsep{0pt}
     \setlength{\extrarowheight}{0pt}
@@ -659,7 +662,7 @@
 % Define an environment for cvskill
 \newenvironment{cvskills}{%
   \vspace{\acvSectionContentTopSkip}
-  \vspace{-2.0mm}
+  \vspace{-3.0mm}
   \begin{center}
     \setlength\tabcolsep{1ex}
     \setlength{\extrarowheight}{0pt}
