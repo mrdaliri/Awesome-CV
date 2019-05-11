@@ -564,7 +564,7 @@
 % Define a paragraph for CV
 \newenvironment{cvparagraph}{%
   \vspace{\acvSectionContentTopSkip}
-  \vspace{-3mm}
+  \vspace{-1mm}
   \paragraphstyle
 }{%
   \par
